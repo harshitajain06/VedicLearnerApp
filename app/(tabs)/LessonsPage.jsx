@@ -1,29 +1,43 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const Modules = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      {/* Header Section */}
       <View style={styles.header}>
         <Text style={styles.title}>Modules</Text>
       </View>
-
-      {/* Colorful Buttons */}
       <ScrollView contentContainerStyle={styles.buttonContainer}>
-        <TouchableOpacity style={[styles.button, styles.addition]}>
+        <TouchableOpacity
+          style={[styles.button, styles.addition]}
+          onPress={() => navigation.navigate('Addition')}
+        >
           <Text style={styles.buttonText}>Module I - Addition</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.subtraction]}>
+        <TouchableOpacity
+          style={[styles.button, styles.subtraction]}
+          onPress={() => navigation.navigate('Subtraction')}
+        >
           <Text style={styles.buttonText}>Module II - Subtraction</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.multiplication]}>
+        <TouchableOpacity
+          style={[styles.button, styles.multiplication]}
+          onPress={() => navigation.navigate('Multiplication')}
+        >
           <Text style={styles.buttonText}>Module III - Multiplication</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.division]}>
+        <TouchableOpacity
+          style={[styles.button, styles.division]}
+          onPress={() => navigation.navigate('Division')}
+        >
           <Text style={styles.buttonText}>Module IV - Division</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.advanced]}>
+        <TouchableOpacity
+          style={[styles.button, styles.advanced]}
+          onPress={() => navigation.navigate('Advanced Operations')}
+        >
           <Text style={styles.buttonText}>Module V - Advanced Operations</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -71,31 +85,25 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  // Color styles for each button
   addition: {
     borderColor: '#FFB6C1',
     backgroundColor: '#FFF0F5',
-    color: '#FF69B4',
   },
   subtraction: {
     borderColor: '#FFD700',
     backgroundColor: '#FFFACD',
-    color: '#DAA520',
   },
   multiplication: {
     borderColor: '#7FFFD4',
     backgroundColor: '#E0FFFF',
-    color: '#20B2AA',
   },
   division: {
     borderColor: '#ADD8E6',
     backgroundColor: '#E6F7FF',
-    color: '#4682B4',
   },
   advanced: {
     borderColor: '#90EE90',
     backgroundColor: '#F0FFF0',
-    color: '#32CD32',
   },
 });
 
