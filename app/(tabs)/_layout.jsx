@@ -1,4 +1,3 @@
-// src/navigation/StackLayout.jsx
 import React from 'react';
 import { Alert } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -9,6 +8,7 @@ import HomePage from './HomePage';
 import LessonsPage from './LessonsPage';
 import TrackPage from './TrackPage';
 import PracticePage from './PracticePage';
+import AddPractice from './AddPractice'; // Import AddPractice screen
 import RegisterScreen from './Register';
 import Login from './Login';
 import { Colors } from '../../constants/Colors';
@@ -20,6 +20,21 @@ import { auth } from '../../config/firebase'; // Adjust the path to your Firebas
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+
+// Practice Stack Navigator
+const PracticeStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false, // Show headers for nested screens
+      }}
+    >
+      <Stack.Screen name="PracticePage" component={PracticePage} options={{ title: 'Practice' }} />
+      <Stack.Screen name="AddPractice" component={AddPractice} options={{ title: 'Addition Practice' }} />
+      {/* Add other practice-related screens here */}
+    </Stack.Navigator>
+  );
+};
 
 // Bottom Tab Navigator Component
 const BottomTabs = () => {
@@ -54,7 +69,7 @@ const BottomTabs = () => {
       <Tab.Screen name="Home" component={HomePage} />
       <Tab.Screen name="Lessons" component={LessonsPage} />
       <Tab.Screen name="Track" component={TrackPage} />
-      <Tab.Screen name="Practice" component={PracticePage} />
+      <Tab.Screen name="Practice" component={PracticeStack} />
     </Tab.Navigator>
   );
 };
@@ -105,7 +120,6 @@ const DrawerNavigator = () => {
         }}
         listeners={{
           drawerItemPress: (e) => {
-            // Prevent navigation to Logout screen and show logout alert instead
             e.preventDefault();
             handleLogout();
           },
