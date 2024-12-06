@@ -98,12 +98,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   questionBox: {
-    paddingTop: 25,
-    paddingBottom: 25,
+    paddingTop: 20,
+    paddingBottom: 20,
     backgroundColor: '#00291b',
     alignItems: 'center',
     marginBottom: 10,
     borderRadius: 20,
+    marginRight: 20,
+    marginLeft: 20,
   },
   questionText: {
     fontSize: 30,
@@ -115,6 +117,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'space-evenly',
     paddingHorizontal: 20,
+    marginLeft: 20,
+    marginRight: 20
   },
   optionButton: {
     padding: 15,
