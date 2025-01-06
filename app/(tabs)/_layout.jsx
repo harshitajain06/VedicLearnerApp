@@ -16,6 +16,15 @@ import { useColorScheme } from '../../hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons'; // If using Expo
 import { signOut } from 'firebase/auth'; // Ensure Firebase auth is configured
 import { auth } from '../../config/firebase'; // Adjust the path to your Firebase config file
+import LessonDetail from './LessonDetail'
+
+// Import your modules screens
+import Addition from './Addition';
+
+// import Subtraction from './Subtraction';
+// import Multiplication from './Multiplication';
+// import Division from './Division';
+// import AdvancedOperations from './AdvancedOperations';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -146,6 +155,14 @@ export default function StackLayout() {
 
       {/* Main App with Drawer */}
       <Stack.Screen name="Drawer" component={DrawerNavigator} />
+
+      {/* Modules screens */}
+      <Stack.Screen name="Addition" component={Addition} />
+      <Stack.Screen name="LessonDetail" component={LessonDetail} />
+      {/* <Stack.Screen name="Subtraction" component={Subtraction} />
+      <Stack.Screen name="Multiplication" component={Multiplication} />
+      <Stack.Screen name="Division" component={Division} />
+      <Stack.Screen name="Advanced Operations" component={AdvancedOperations} /> */}
     </Stack.Navigator>
   );
 }
