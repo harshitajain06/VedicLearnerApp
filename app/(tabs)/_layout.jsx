@@ -20,8 +20,7 @@ import LessonDetail from './LessonDetail'
 
 // Import your modules screens
 import Addition from './Addition';
-
-// import Subtraction from './Subtraction';
+import Subtraction from './Subtraction';
 // import Multiplication from './Multiplication';
 // import Division from './Division';
 // import AdvancedOperations from './AdvancedOperations';
@@ -77,7 +76,7 @@ const BottomTabs = () => {
     >
       <Tab.Screen name="Home" component={HomePage} />
       <Tab.Screen name="Lessons" component={LessonsPage} />
-      <Tab.Screen name="Track" component={TrackPage} />
+      {/* <Tab.Screen name="Track" component={TrackPage} /> */}
       <Tab.Screen name="Practice" component={PracticeStack} />
     </Tab.Navigator>
   );
@@ -159,7 +158,8 @@ export default function StackLayout() {
       {/* Modules screens */}
       <Stack.Screen name="Addition" component={Addition} />
       <Stack.Screen name="LessonDetail" component={LessonDetail} />
-      {/* <Stack.Screen name="Subtraction" component={Subtraction} />
+      <Stack.Screen name="Subtraction" component={Subtraction} />
+      {/* 
       <Stack.Screen name="Multiplication" component={Multiplication} />
       <Stack.Screen name="Division" component={Division} />
       <Stack.Screen name="Advanced Operations" component={AdvancedOperations} /> */}

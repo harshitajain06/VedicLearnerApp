@@ -13,7 +13,7 @@ const Addition = () => {
   const fetchLessons = async () => {
     try {
       const db = getFirestore(app);
-      const querySnapshot = await getDocs(collection(db, 'additionLessons')); // Ensure your collection is named 'additionLessons'
+      const querySnapshot = await getDocs(collection(db, 'subtractionLessons')); // Ensure your collection is named 'additionLessons'
       const lessonsList = [];
       querySnapshot.forEach((doc) => {
         lessonsList.push({ id: doc.id, ...doc.data() });
@@ -46,7 +46,7 @@ const Addition = () => {
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button}>
           <Ionicons name="arrow-back" size={24} color="#fff" />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Addition</Text>
+        <Text style={styles.headerTitle}>Subtraction</Text>
       </View>
 
       {/* Lessons List */}
@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 50,
     marginLeft: 10,
-    marginRight: 50
   },
   headerTitle: {
     fontSize: 28,
