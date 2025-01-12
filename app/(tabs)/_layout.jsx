@@ -44,6 +44,22 @@ const PracticeStack = () => {
   );
 };
 
+const ModulesStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false, // Show headers for nested screens
+      }}
+    >
+      <Stack.Screen name="LessonsPage" component={LessonsPage} options={{ title: 'Lessons' }} />
+      <Stack.Screen name="Addition" component={Addition} />
+      <Stack.Screen name="LessonDetail" component={LessonDetail} />
+      <Stack.Screen name="Subtraction" component={Subtraction} />
+      {/* Add other practice-related screens here */}
+    </Stack.Navigator>
+  );
+};
+
 // Bottom Tab Navigator Component
 const BottomTabs = () => {
   const colorScheme = useColorScheme();
@@ -75,7 +91,7 @@ const BottomTabs = () => {
       })}
     >
       <Tab.Screen name="Home" component={HomePage} />
-      <Tab.Screen name="Lessons" component={LessonsPage} />
+      <Tab.Screen name="Lessons" component={ModulesStack} />
       {/* <Tab.Screen name="Track" component={TrackPage} /> */}
       <Tab.Screen name="Practice" component={PracticeStack} />
     </Tab.Navigator>
@@ -156,9 +172,7 @@ export default function StackLayout() {
       <Stack.Screen name="Drawer" component={DrawerNavigator} />
 
       {/* Modules screens */}
-      <Stack.Screen name="Addition" component={Addition} />
-      <Stack.Screen name="LessonDetail" component={LessonDetail} />
-      <Stack.Screen name="Subtraction" component={Subtraction} />
+      
       {/* 
       <Stack.Screen name="Multiplication" component={Multiplication} />
       <Stack.Screen name="Division" component={Division} />

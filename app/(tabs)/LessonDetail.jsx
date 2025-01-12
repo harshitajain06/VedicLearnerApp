@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, ScrollView } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { WebView } from 'react-native-webview'; // Import WebView to render YouTube videos
 import { Ionicons } from '@expo/vector-icons'; // For icons like back and close buttons
@@ -33,27 +33,21 @@ const LessonDetail = () => {
 
   return (
     <View style={styles.container}>
+      {/* Header */}
       <View style={styles.header}>
-        {/* Back Button */}
-        <TouchableOpacity onPress={handleBackPress} style={styles.button}>
-          <Ionicons name="arrow-back" size={24} color="#fff" />
-        </TouchableOpacity>
-
-        
-        
+        <Text style={styles.headerTitle}>Lesson Details</Text>
       </View>
 
-      <Text style={styles.title}>{lessonData.title}</Text>
-
-      <View style={styles.contentContainer}>
-        {/* Display the description */}
+      {/* Content Container */}
+      <ScrollView contentContainerStyle={styles.contentContainer}>
+        <Text style={styles.title}>{lessonData.title}</Text>
         <Text style={styles.description}>{lessonData.description}</Text>
 
         {/* Button to open the video modal */}
         <TouchableOpacity style={styles.videoButton} onPress={openModal}>
           <Text style={styles.videoButtonText}>Watch Video</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
 
       {/* Modal for YouTube Video */}
       <Modal
@@ -84,42 +78,42 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#FFF',
+    backgroundColor: '#F3F7FA', // Light background similar to the Addition page
   },
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
-    position: 'absolute',
-    top: 10,
-    left: 0,
-    right: 0,
-    zIndex: 1, // Ensure the header is above the content
-    marginTop: 50,
+    paddingVertical: 20,
+    backgroundColor: '#567396', // Soft blue header
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    zIndex: 10,
   },
-  button: {
-    backgroundColor: '#567396',
-    padding: 10,
-    borderRadius: 50,
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    textAlign: 'center',
+  },
+  contentContainer: {
+    paddingTop: 30, // Space for header
+    paddingBottom: 20,
+    alignItems: 'center',
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginTop: 50, // To leave space for the header
-    marginBottom: 20,
     color: '#333',
-  },
-  contentContainer: {
-    paddingHorizontal: 10,
-    paddingVertical: 20,
+    marginBottom: 20,
   },
   description: {
     fontSize: 18,
     lineHeight: 24,
     color: '#666',
     marginBottom: 20, // Add space between description and video
+    textAlign: 'center',
+    width: '80%',
   },
   videoButton: {
     padding: 15,
