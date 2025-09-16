@@ -122,6 +122,13 @@ const RegisterScreen = () => {
             <Text style={styles.loginLink}>Login</Text>
           </TouchableOpacity>
         </View>
+
+        {/* Account Deletion Info */}
+        <View style={styles.deletionInfoContainer}>
+          <Text style={styles.deletionInfoText}>
+            Need to delete your account? Access "Account Settings" from the menu after logging in.
+          </Text>
+        </View>
       </View>
       <Toast />
     </View>
@@ -192,6 +199,16 @@ const styles = StyleSheet.create({
     color: '#007BFF',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  deletionInfoContainer: {
+    marginTop: 20,
+    paddingHorizontal: 10,
+  },
+  deletionInfoText: {
+    color: '#666',
+    fontSize: 12,
+    textAlign: 'center',
+    lineHeight: 16,
   },
 });
 

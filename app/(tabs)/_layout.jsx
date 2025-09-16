@@ -9,6 +9,9 @@ import LessonsPage from './LessonsPage';
 import TrackPage from './TrackPage';
 import PracticePage from './PracticePage';
 import AddPractice from './AddPractice'; // Import AddPractice screen
+import SubPractice from './SubPractice'; // Import SubPractice screen
+import MulPractice from './MulPractice'; // Import MulPractice screen
+import DivPractice from './DivPractice'; // Import DivPractice screen
 import RegisterScreen from './Register';
 import Login from './Login';
 import { Colors } from '../../constants/Colors';
@@ -17,13 +20,14 @@ import { Ionicons } from '@expo/vector-icons'; // If using Expo
 import { signOut } from 'firebase/auth'; // Ensure Firebase auth is configured
 import { auth } from '../../config/firebase'; // Adjust the path to your Firebase config file
 import LessonDetail from './LessonDetail'
+import UserProfile from './UserProfile'
 
 // Import your modules screens
 import Addition from './Addition';
 import Subtraction from './Subtraction';
-// import Multiplication from './Multiplication';
-// import Division from './Division';
-// import AdvancedOperations from './AdvancedOperations';
+import Multiplication from './Multiplication';
+import Division from './Division';
+import AdvancedOperations from './AdvancedOperations';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -39,7 +43,9 @@ const PracticeStack = () => {
     >
       <Stack.Screen name="PracticePage" component={PracticePage} options={{ title: 'Practice' }} />
       <Stack.Screen name="AddPractice" component={AddPractice} options={{ title: 'Addition Practice' }} />
-      {/* Add other practice-related screens here */}
+      <Stack.Screen name="SubPractice" component={SubPractice} options={{ title: 'Subtraction Practice' }} />
+      <Stack.Screen name="MulPractice" component={MulPractice} options={{ title: 'Multiplication Practice' }} />
+      <Stack.Screen name="DivPractice" component={DivPractice} options={{ title: 'Division Practice' }} />
     </Stack.Navigator>
   );
 };
@@ -55,7 +61,9 @@ const ModulesStack = () => {
       <Stack.Screen name="Addition" component={Addition} />
       <Stack.Screen name="LessonDetail" component={LessonDetail} />
       <Stack.Screen name="Subtraction" component={Subtraction} />
-      {/* Add other practice-related screens here */}
+      <Stack.Screen name="Multiplication" component={Multiplication} />
+      <Stack.Screen name="Division" component={Division} />
+      <Stack.Screen name="Advanced Operations" component={AdvancedOperations} />
     </Stack.Navigator>
   );
 };
@@ -130,7 +138,18 @@ const DrawerNavigator = () => {
   return (
     <Drawer.Navigator initialRouteName="MainTabs">
       <Drawer.Screen name="MainTabs" component={BottomTabs} options={{ title: 'Home' }} />
-      {/* Additional screens can be added here if needed */}
+      
+      {/* User Profile */}
+      <Drawer.Screen 
+        name="UserProfile" 
+        component={UserProfile} 
+        options={{
+          title: 'Account Settings',
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="person-outline" size={size} color={color} />
+          ),
+        }}
+      />
 
       {/* Logout option */}
       <Drawer.Screen
@@ -172,11 +191,6 @@ export default function StackLayout() {
       <Stack.Screen name="Drawer" component={DrawerNavigator} />
 
       {/* Modules screens */}
-      
-      {/* 
-      <Stack.Screen name="Multiplication" component={Multiplication} />
-      <Stack.Screen name="Division" component={Division} />
-      <Stack.Screen name="Advanced Operations" component={AdvancedOperations} /> */}
     </Stack.Navigator>
   );
 }
