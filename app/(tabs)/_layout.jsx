@@ -18,7 +18,7 @@ import { Colors } from '../../constants/Colors';
 import { useColorScheme } from '../../hooks/useColorScheme';
 import { Ionicons } from '@expo/vector-icons'; // If using Expo
 import { signOut } from 'firebase/auth'; // Ensure Firebase auth is configured
-import { auth } from '../../config/firebase'; // Adjust the path to your Firebase config file
+import { auth } from '../../config/firebase'; // Adjust the path to your Firebase config 
 import LessonDetail from './LessonDetail'
 import UserProfile from './UserProfile'
 
