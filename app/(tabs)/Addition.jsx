@@ -43,7 +43,14 @@ const Addition = () => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
+        <TouchableOpacity 
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
+        </TouchableOpacity>
         <Text style={styles.headerTitle}>Module I - Addition</Text>
+        <View style={styles.placeholder} />
       </View>
 
       {/* Lessons List */}
@@ -92,6 +99,14 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     textAlign: 'center',
     flex: 1,
+  },
+  backButton: {
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  },
+  placeholder: {
+    width: 40, // Same width as back button to center the title
   },
   lessonsContainer: {
     paddingTop: 100, // Space for header

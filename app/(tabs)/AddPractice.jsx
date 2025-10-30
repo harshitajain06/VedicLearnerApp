@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet, Modal } from 'react-native';
 
 const AddPractice = ({ navigation }) => {
   const [question, setQuestion] = useState(generateQuestion());
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [modalTitle, setModalTitle] = useState('');
+  const [isCorrect, setIsCorrect] = useState(false);
 
   // Generate a random addition question
   function generateQuestion() {
@@ -25,14 +29,25 @@ const AddPractice = ({ navigation }) => {
 
   const handleOptionPress = (option) => {
     if (option === question.correctAnswer) {
-      Alert.alert('Correct!', 'You selected the right answer.', [
-        { text: 'Next Question', onPress: () => setQuestion(generateQuestion()) },
-      ]);
+      setModalTitle('Correct!');
+      setModalMessage('You selected the right answer.');
+      setIsCorrect(true);
+      setModalVisible(true);
     } else {
-      Alert.alert('Incorrect', 'That is not the correct answer.', [
-        { text: 'Try Again' },
-      ]);
+      setModalTitle('Incorrect');
+      setModalMessage('That is not the correct answer.');
+      setIsCorrect(false);
+      setModalVisible(true);
     }
+  };
+
+  const handleNextQuestion = () => {
+    setModalVisible(false);
+    setQuestion(generateQuestion());
+  };
+
+  const handleTryAgain = () => {
+    setModalVisible(false);
   };
 
   return (
@@ -73,6 +88,38 @@ const AddPractice = ({ navigation }) => {
           <Text style={styles.buttonText}>Back to Practice Page</Text>
         </TouchableOpacity>
       </ScrollView>
+
+      {/* Modal for feedback */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>{modalTitle}</Text>
+            <Text style={styles.modalMessage}>{modalMessage}</Text>
+            <View style={styles.modalButtonContainer}>
+              {isCorrect ? (
+                <TouchableOpacity
+                  style={[styles.modalButton, styles.nextButton]}
+                  onPress={handleNextQuestion}
+                >
+                  <Text style={styles.modalButtonText}>Next Question</Text>
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={[styles.modalButton, styles.tryAgainButton]}
+                  onPress={handleTryAgain}
+                >
+                  <Text style={styles.modalButtonText}>Try Again</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -154,6 +201,60 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#FFFFFF',
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  modalContainer: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 30,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    minWidth: 300,
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  modalMessage: {
+    fontSize: 16,
+    marginBottom: 25,
+    textAlign: 'center',
+    color: '#666',
+  },
+  modalButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  modalButton: {
+    paddingHorizontal: 30,
+    paddingVertical: 12,
+    borderRadius: 25,
+    marginHorizontal: 10,
+  },
+  nextButton: {
+    backgroundColor: '#4CAF50',
+  },
+  tryAgainButton: {
+    backgroundColor: '#FF9800',
+  },
+  modalButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
