@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Modal, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Modal, ScrollView, Platform } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { WebView } from 'react-native-webview'; // Import WebView to render YouTube videos
 import { Ionicons } from '@expo/vector-icons'; // For icons like back and close buttons
@@ -10,6 +10,35 @@ const LessonDetail = () => {
   const { lessonData } = route.params; // Get the lesson data passed via navigation
 
   const [modalVisible, setModalVisible] = useState(false); // State to control modal visibility
+
+  // Function to convert YouTube URL to embed format
+  const getYouTubeEmbedUrl = (url) => {
+    if (!url) return '';
+    
+    // If it's already an embed URL, return it as is
+    if (url.includes('/embed/')) {
+      return url;
+    }
+    
+    // Extract video ID from various YouTube URL formats
+    let videoId = '';
+    
+    // Format: https://www.youtube.com/watch?v=VIDEO_ID
+    if (url.includes('watch?v=')) {
+      videoId = url.split('watch?v=')[1].split('&')[0];
+    }
+    // Format: https://youtu.be/VIDEO_ID
+    else if (url.includes('youtu.be/')) {
+      videoId = url.split('youtu.be/')[1].split('?')[0];
+    }
+    // Format: https://www.youtube.com/v/VIDEO_ID
+    else if (url.includes('/v/')) {
+      videoId = url.split('/v/')[1].split('?')[0];
+    }
+    
+    // Return the embed URL
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+  };
 
   // Function to handle the back action
   const handleBackPress = () => {
@@ -58,12 +87,25 @@ const LessonDetail = () => {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <WebView
-              source={{ uri: lessonData.youtubeLink }} // YouTube video link passed from the previous screen
-              style={styles.video}
-              javaScriptEnabled={true}
-              allowsFullscreenVideo={true}
-            />
+            {Platform.OS === 'web' ? (
+              <iframe
+                src={getYouTubeEmbedUrl(lessonData.youtubeLink)}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  border: 'none',
+                }}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            ) : (
+              <WebView
+                source={{ uri: getYouTubeEmbedUrl(lessonData.youtubeLink) }} // YouTube video link passed from the previous screen
+                style={styles.video}
+                javaScriptEnabled={true}
+                allowsFullscreenVideo={true}
+              />
+            )}
             <TouchableOpacity style={styles.closeModalButton} onPress={closeModal}>
               <Ionicons name="close-circle" size={40} color="#567396" />
             </TouchableOpacity>
