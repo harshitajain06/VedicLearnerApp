@@ -78,12 +78,7 @@ const SubPractice = ({ navigation }) => {
         {/* Back to Practice Page */}
         <TouchableOpacity
           style={[styles.button, styles.home]}
-          onPress={() =>
-            navigation.navigate('Drawer', {
-              screen: 'MainTabs',
-              params: { screen: 'Practice' },
-            })
-          }
+          onPress={() => navigation.navigate('PracticePage')}
         >
           <Text style={styles.buttonText}>Back to Practice Page</Text>
         </TouchableOpacity>
