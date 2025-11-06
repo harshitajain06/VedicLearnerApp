@@ -65,7 +65,7 @@ const LessonDetail = () => {
               allowsFullscreenVideo={true}
             />
             <TouchableOpacity style={styles.closeModalButton} onPress={closeModal}>
-              <Ionicons name="close-circle" size={40} color="white" />
+              <Ionicons name="close-circle" size={40} color="#567396" />
             </TouchableOpacity>
           </View>
         </View>
